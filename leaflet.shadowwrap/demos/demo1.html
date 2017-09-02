@@ -8,17 +8,20 @@
         <link type="text/css" rel="stylesheet" href="lib/leaflet.css" />
         <link type="text/css" rel="stylesheet" href="lib/leaflet.draw.css" />
         <script type="text/javascript" src="lib/leaflet.js"></script>
-        <script type="text/javascript" src="lib/leaflet.draw.js"></script>
-        
-        <script type="text/javascript" src="leaflet.shadowwrap.js"></script>
+        <script type="text/javascript" src="lib/leaflet.draw-custom.js"></script>
     </head>
     
     <body>
         <div id="map" style="height:400px; width: 500px;"></div>
         
         <script>
-        L.ShadowWrap.initialize();
+        /* globals L:false */
         
+        // NOTE:
+        // in this demo, Leaflet.ShadowWrap is not used and thus shapes wrap incorrectly
+        // and disappear across the international dateline.
+        // see demo2 for the correct behaivor
+
         var map = L.map('map', {
             worldCopyJump: true
         }).setView([10.8, -155.7], 2);
@@ -28,43 +31,37 @@
             maxZoom: 18
         }).addTo(map);
         
-        var drawnItems = L.featureGroup([]);
-        drawnItems.addTo(map);
-        var guideLayers = [];
+        var drawnItems = L.featureGroup([]).addTo(map);
         
         var drawControl = new L.Control.Draw({
             edit: {
                 featureGroup: drawnItems,
                 poly : {
-                    allowIntersection : true
+                    allowIntersection : false
                 }
             },
             draw: {
                 polygon : {
-                    allowIntersection: true,
-                    showArea: true
+                    allowIntersection: false
                 },
             }
         });
         
         map.addControl(drawControl);
         
-        // add a dateline
-        var x1 = new L.Rectangle([[-88, 179.75], [88, 179.99]], {
-            'noShadow': true,
+        new L.Rectangle([[-88, 179.75], [88, 179.99]], {
             'color': 'black',
             'opacity': 0.3
         }).addTo(map);
-        var x2 = new L.Rectangle([[-88, -179.75], [88, -179.99]], {
-            'noShadow': true,
+        new L.Rectangle([[-88, -179.75], [88, -179.99]], {
             'color': 'black',
             'opacity': 0.3
         }).addTo(map);
-
+        
         // add a few default shapes to be manipulable by leaflet draw
-        var aus_marker = L.marker([-29.5, 143]);
-        aus_marker.bindPopup('-29.5, 143');
-
+        var aus_marker = L.marker([-29.5, -173]);
+        aus_marker.bindPopup('-29.5, 173');
+        
         var us_marker = L.marker([35.5, -119]);
         us_marker.bindPopup('35.5, -123');
         
@@ -72,7 +69,14 @@
         var c = new L.Circle([-29, -177], 2000000);
         
         var initialLayers = [aus_marker, us_marker, r, c];
-        L.ShadowWrap.hookLeafletDraw(drawnItems, [], initialLayers);
+        
+        for (var i=0; i<initialLayers.length; i++) {
+            drawnItems.addLayer(initialLayers[i]);
+        }
+        
+        map.on(L.Draw.Event.CREATED, function (e) {
+            drawnItems.addLayer(e.layer);
+        });
         
         </script>
     </body>
