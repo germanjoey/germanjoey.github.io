@@ -2,6 +2,7 @@
 // jshint laxbreak:true
 
 L.ShadowWrap = {};
+
 L.ShadowWrap.minimumWrapDistance = 0;
 L.ShadowWrap.EventsToShadow = ['contextmenu', 'click', 'dblclick', 'mousedown', 'mouseover', 'mouseout'];
 
@@ -51,7 +52,7 @@ L.ShadowWrap.EventsToShadow = ['contextmenu', 'click', 'dblclick', 'mousedown', 
 //            as with polygon and polyine's init method. this category also exists if there's any custom methods
 //            that one needs to implement that are defined on the various shapes. 
 
-L.ShadowWrap.MethodsToWrap = {
+L.ShadowWrap.ShadowDefinitions = {
     'L.Layer': {
         'translated': [['openTooltip', 1], ['openPopup', 1]],
         'simple': [
@@ -66,47 +67,145 @@ L.ShadowWrap.MethodsToWrap = {
     
     'L.Polyline': {
         'addInitHook': true,
-        'shadowCheckType': 'cross',
-        
         'simple': ['_update'],
         'multiLatlngs': ['_setLatLngs', '_convertLatLngs'],
         'translateRechecked': [['addLatLng', 0]],
     },
     
     'L.Polygon': {
-        'shadowCheckType': 'cross',
         'multiLatlngs': ['_setLatLngs', '_convertLatLngs'],
     },
     
     'L.Rectangle': {
-        'shadowCheckType': 'cross',
         'special': ['_boundsToLatLngs'],
     },
     
     'L.Marker': {
         'addInitHook': true,
-        'shadowCheckType': 'point',
         'simple': ['setZIndexOffset', 'setIcon', '_setPos', 'update', 'setOpacity'],
         'translateRechecked': [['setLatLng', 0]],
     },
     
     'L.CircleMarker': {
         'addInitHook': true,
-        'shadowCheckType': 'circle',
-        
         'simple': ['setStyle', '_updateBounds', '_update'],
         'rechecked': ['setRadius'],
         'translateRechecked': [['setLatLng', 0]],
     },
     
     'L.Circle': {
-        'shadowCheckType': 'circle',
-        
-        'simple': ['_project'],
+        'simple': [''],
         'rechecked': ['setRadius'],
         'translateRechecked': [['setLatLng', 0]],
     }
 };
+
+
+// see the huge table and corresponding comment at the top of this file to understand what this is doing
+L.ShadowWrap.installShadowHooks = function (className, classSettings) {
+    className = className.replace('L.', '');
+    
+    var i;
+    var methodName;
+    var translationIndex;
+    var cls = L[className];
+    
+    L.ShadowWrap.shadowExceptions[className] = {};
+    if (classSettings.hasOwnProperty('addInitHook') && (classSettings.addInitHook === true)) {
+        cls.addInitHook(L.ShadowWrap.initializeShadowHooks);
+    }
+    
+    if (classSettings.hasOwnProperty('simple')) {
+        for (i=0; i<classSettings.simple.length; i++) {
+            methodName = classSettings.simple[i];
+            L.ShadowWrap.installShadowMethod(cls, className, methodName, null, false);
+        }
+    }
+        
+    if (classSettings.hasOwnProperty('rechecked')) {
+        for (i=0; i<classSettings.rechecked.length; i++) {
+            methodName = classSettings.rechecked[i];
+            L.ShadowWrap.installShadowMethod(cls, className, methodName, null, true);
+        }
+    }
+        
+    if (classSettings.hasOwnProperty('translated')) {
+        for (i=0; i<classSettings.translated.length; i++) {
+            methodName = classSettings.translated[i][0];
+            translationIndex = classSettings.translated[i][1];
+            L.ShadowWrap.installShadowMethod(cls, className, methodName, translationIndex, false);
+        }
+    }
+        
+    if (classSettings.hasOwnProperty('translateRechecked')) {
+        for (i=0; i<classSettings.translateRechecked.length; i++) {
+            methodName = classSettings.translateRechecked[i][0];
+            translationIndex = classSettings.translateRechecked[i][1];
+            L.ShadowWrap.installShadowMethod(cls, className, methodName, translationIndex, true);
+        }
+    }
+        
+    if (classSettings.hasOwnProperty('multiLatlngs')) {
+        for (i=0; i<classSettings.multiLatlngs.length; i++) {  
+            methodName = classSettings.multiLatlngs[i];
+            L.ShadowWrap.installInheritedShadowMethod(cls, className, methodName);
+        }
+    }
+        
+    if (classSettings.hasOwnProperty('special')) {
+        for (i=0; i<classSettings.special.length; i++) {
+            methodName = classSettings.special[i];
+            cls.prototype[methodName + '__original'] = cls.prototype[methodName];
+            cls.prototype[methodName] = L.ShadowWrap.SpecialMethods[methodName];
+        }
+    }
+};
+
+// *************************************************************************************
+// *************************************************************************************
+
+// L.ShadowWrap.addExtension is used for integrating ShadowWrap into other plugins, if they
+// happen to modify one of the shapes' prototypes. basically, it allows you to add your stuff
+// to the ShadowDefinitions table before the table gets stuffed into the leaflet geometry prototype(s)
+L.ShadowWrap.initRun = false;
+L.ShadowWrap.extensions = {};
+L.ShadowWrap.addExtension = function (extensionName, initializerCallback) {
+    if (L.ShadowWrap.initRun === false) {
+        L.ShadowWrap.extensions[extensionName] = initializerCallback;
+    }
+    else {
+        initializerCallback();
+    }
+};
+
+// the main installation method, to be manually called in your main.js or whatever
+// (the manual call is so that you can add stuff to L.ShadowWrap.EventsToShadow and
+// L.ShadowWrap.ShadowDefinitions if you have some sort of other plugin, or whatever)
+L.ShadowWrap.initialize = function () {
+    if (L.ShadowWrap.initRun === true) {
+        return;
+    }
+
+    // for leaflet.textpath.js
+    if (L.Polyline.prototype.hasOwnProperty('setText')) {
+        L.ShadowWrap.ShadowDefinitions['L.Polyline'].simple.push('setText');
+    }
+
+    for (var className in L.ShadowWrap.ShadowDefinitions) {
+        if (L.ShadowWrap.ShadowDefinitions.hasOwnProperty(className)) {
+            L.ShadowWrap.installShadowHooks(className, L.ShadowWrap.ShadowDefinitions[className]);
+        }
+    }
+        
+    for (var extensionName in L.ShadowWrap.extensions) {
+        if (L.ShadowWrap.extensions.hasOwnProperty(extensionName)) {
+            L.ShadowWrap.extensions[extensionName]();
+        }
+    }
+    
+    L.ShadowWrap.initRun = true;
+};
+/* globals L:true */
 
 // *************************************************************************************
 // *************************************************************************************
@@ -162,9 +261,10 @@ L.ShadowWrap.checkExceptions = function (className, methodName, obj) {
     
     return false;
 };
+/* globals L:true */
 
-// ***************************************************************************************
-// ***************************************************************************************
+// *************************************************************************************
+// *************************************************************************************
 
 // the shadow constructor, which sounds like the name of one hell of a chinese webnovel
 L.ShadowWrap.initializeShadowHooks = function () {
@@ -180,90 +280,25 @@ L.ShadowWrap.initializeShadowHooks = function () {
         'isShape': true,
         'shadowShapes': {},
         'shadowSplit': false,
-        'secondaryExecutor': false
+        'secondaryExecutor': false,
+        'blockChanges': false
     };
     
     if (this.options.hasOwnProperty('isShadow') && (this.options.isShadow === true)) {
         return;
     }
 
-    this.shadowOptions.shadowType = 'normalizeLL';    
+    this.shadowOptions.shadowType = 'normalizeLL';
     this.shadowOptions.isShadow = false;
     
     this.on('add', this.addShadows, this);
     this.on('remove', this.removeAllShadows, this);
 };
 
-// see the huge table and corresponding comment at the top of this file to understand what this is doing
-L.ShadowWrap.installShadowHooks = function (className, classSettings) {
-    className = className.replace('L.', '');
-    
-    var i;
-    var methodName;
-    var translationIndex;
-    var cls = L[className];
-    
-    L.ShadowWrap.shadowExceptions[className] = {};
-    if (classSettings.hasOwnProperty('addInitHook') && (classSettings.addInitHook === true)) {
-        cls.addInitHook(L.ShadowWrap.initializeShadowHooks);
-    }
-    
-    if (classSettings.hasOwnProperty('shadowCheckType')) {
-        cls.prototype.options.shadowCheckType = classSettings.shadowCheckType;
-    }
-  
-    if (classSettings.hasOwnProperty('simple')) {
-        for (i=0; i<classSettings.simple.length; i++) {
-            methodName = classSettings.simple[i];
-            L.ShadowWrap.installShadowMethod(cls, className, methodName, null, false);
-        }
-    }
-        
-    if (classSettings.hasOwnProperty('rechecked')) {
-        for (i=0; i<classSettings.rechecked.length; i++) {
-            methodName = classSettings.rechecked[i];
-            L.ShadowWrap.installShadowMethod(cls, className, methodName, null, true);
-        }
-    }
-        
-    if (classSettings.hasOwnProperty('translated')) {
-        for (i=0; i<classSettings.translated.length; i++) {
-            methodName = classSettings.translated[i][0];
-            translationIndex = classSettings.translated[i][1];
-            L.ShadowWrap.installShadowMethod(cls, className, methodName, translationIndex, false);
-        }
-    }
-        
-    if (classSettings.hasOwnProperty('translateRechecked')) {
-        for (i=0; i<classSettings.translateRechecked.length; i++) {
-            methodName = classSettings.translateRechecked[i][0];
-            translationIndex = classSettings.translateRechecked[i][1];
-            L.ShadowWrap.installShadowMethod(cls, className, methodName, translationIndex, true);
-        }
-    }
-        
-    if (classSettings.hasOwnProperty('multiLatlngs')) {
-        for (i=0; i<classSettings.multiLatlngs.length; i++) {  
-            methodName = classSettings.multiLatlngs[i];
-            L.ShadowWrap.installInheritedShadowMethod(cls, className, methodName);
-        }
-    }
-        
-    if (classSettings.hasOwnProperty('special')) {
-        for (i=0; i<classSettings.special.length; i++) {
-            methodName = classSettings.special[i];
-            cls.prototype[methodName + '__original'] = cls.prototype[methodName];
-            cls.prototype[methodName] = L.ShadowWrap.SpecialMethods[methodName];
-        }
-    }
-};
-
-// *************************************************************************************
-// *************************************************************************************
 
 L.ShadowWrap.installShadowMethod = function (cls, className, methodName, translate, recheck) {
     var dispatchedMethodName = methodName + '__original' + className;
-    var isSingle = (cls.prototype.options.shadowCheckType != 'cross');
+    var isSingle = !((cls.prototype instanceof L.Polyline) || (cls === L.Polyline));
     
     // set the original method name to methodName__original and e.g.
     // methodName__originalRectangle, or whatever the className is
@@ -300,6 +335,11 @@ L.ShadowWrap.installShadowMethod = function (cls, className, methodName, transla
         
         // now clean up and return
         this.shadowOptions.shadowSplit = false;
+        
+        if (translate !== null) {
+            this._fixShape();
+        }
+        
         return ret;
     };
 };
@@ -321,7 +361,7 @@ L.ShadowWrap.installInheritedShadowMethod = function (cls, className, methodName
         this.shadowOptions.shadowSplit = true;
         var llo = this.updatingShadowDispatch(dispatchedMethodName, false, null, [], latlngs);
         
-        var ret = this[dispatchedMethodName](llo.latlngs.normalizeLL);
+        var ret = this[dispatchedMethodName](llo.latlngs[this.shadowOptions.shadowType]);
         this.shadowOptions.shadowSplit = false;
         
         return ret;
@@ -371,279 +411,41 @@ L.ShadowWrap.SpecialMethods._boundsToLatLngs = function (latLngBounds) {
     
     return this._boundsToLatLngs__original(latLngBounds);
 };
-
-// *************************************************************************************
-// *************************************************************************************
+/* globals L:true */
 
 L.Layer.include({
-
-    // this method's job is to calculate if we have any sort of wrap crossing for whatever particular shape we have
-    // as opposed to the rest of this plugin, this part here is relatively straightforward
-    calcShadow: function (latlngs) {
-        L.ShadowWrap.minimumWrapDistance = Math.abs(L.ShadowWrap.minimumWrapDistance);
-        
-        var result = {
-            'needsShadow': {
-                'normLatMirrorLng': false,
-                'mirrorLatNormLng': false,
-                'mirrorLL': false
-            },
-            'latlngs': {
-                'normalizeLL': latlngs,
-                'mirrorLatNormLng': [],
-                'normLatMirrorLng': [],
-                'mirrorLL': []
-            }
-        };
     
-        if ((!this._map) || (!this.shadowOptions.isShape)) {
-            return result;
-        }
-    
-        var i;
-        var shadowType;
-        result.latlngs.normalizeLL = [];
-        
-        var flat = true;
-        if (!(this instanceof L.Marker) && !(this instanceof L.CircleMarker)) {
-            flat = L.LineUtil.isFlat(latlngs);
-        }
-        
-        // the flat check is to see if we have a multipolygon, which must be handled recursively
-        if (flat) {
-            for (i=0; i<latlngs.length; i++) {
-                for (shadowType in result.latlngs) {
-                    if (result.latlngs.hasOwnProperty(shadowType)) {
-                        result.latlngs[shadowType].push(this[shadowType](latlngs[i]));
-                    }
-                }
-            }
-            
-            for (i=0; i<latlngs.length; i++) {
-                result.needsShadow.normLatMirrorLng = result.needsShadow.normLatMirrorLng
-                                                   || this.checkWrap('lng', result.latlngs.normalizeLL, i);
-                result.needsShadow.mirrorLatNormLng = result.needsShadow.mirrorLatNormLng
-                                                   || this.checkWrap('lat', result.latlngs.normalizeLL, i);
-            }
-        }
-        
-        else {
-            for (i=0; i<latlngs.length; i++) {
-                var subShadow = this.calcShadow(latlngs[i]);
-                    
-                for (shadowType in result.latlngs) {
-                    if (result.latlngs.hasOwnProperty(shadowType)) {
-                        result.latlngs[shadowType].push(subShadow.latlngs[shadowType]);
-                    }
-                }
-                
-                result.needsShadow.normLatMirrorLng = result.needsShadow.normLatMirrorLng || subShadow.needsShadow.normLatMirrorLng;
-                result.needsShadow.mirrorLatNormLng = result.needsShadow.mirrorLatNormLng || subShadow.needsShadow.mirrorLatNormLng;
-                result.needsShadow.mirrorLL = result.needsShadow.mirrorLL || subShadow.needsShadow.mirrorLL;
-            }
-        }
-        
-        result.needsShadow.mirrorLL = result.needsShadow.normLatMirrorLng && result.needsShadow.mirrorLatNormLng;
-        return result;
-    },
-    
-    checkWrap: function (coord, latlngs, i) {
-        var properCoordName = coord.substring(0, 1).toUpperCase() + coord.substring(1);
-        
-        if (! this._map.options.crs.hasOwnProperty('wrap' + properCoordName)) {
-            return false;
-        }
-        
-        if (!('shadowCheckType' in this.options)) {
-            return false;
-        }
-    
-        var crossPoints = this._map.options.crs['wrap' + properCoordName];
-        
-        if (this.options.shadowCheckType == 'cross') {
-            return this.checkWrapCrossing(coord, crossPoints, latlngs, i);
-        }
-        else if (this.options.shadowCheckType == 'circle') {
-        
-            // circles have their radius specified in kilometers, so we need to
-            // pseudo-convert to lng to see if our circle cross the meridian
-            var radiusLL = this.options.radius;
-            if (this._map.options.crs.hasOwnProperty('R') && (this._map.options.crs.R !== null)) {
-                radiusLL = radiusLL*(180/Math.PI/this._map.options.crs.R);
-            }
-        
-            return this.checkWrapPoint(coord, crossPoints, latlngs, i, radiusLL);
-        }
-        else if (this.options.shadowCheckType == 'point') {
-            return this.checkWrapPoint(coord, crossPoints, latlngs, i, 0);
-        }
-    },
-    
-    checkWrapCrossing: function (coord, crossPoints, latlngs, i) {
-        var j = i-1;
-        if (i==0) {
-            // polylines don't connect the first and last point, so no need to check
-            if (! (this instanceof L.Polygon)) {
-                return false;
-            }
-            
-            j = latlngs.length - 1;
-        }
-        
-        var dA = latlngs[i][coord] - crossPoints[0];
-        var dB = latlngs[j][coord] - crossPoints[0];
-        var dC = latlngs[i][coord] - crossPoints[1];
-        var dD = latlngs[j][coord] - crossPoints[1];
-        
-        // first check to see if we have a crossing; if so, one of these four will be true:
-        var crossA = (dA > L.ShadowWrap.minimumWrapDistance) && (dB <= L.ShadowWrap.minimumWrapDistance);
-        var crossB = (dA <= L.ShadowWrap.minimumWrapDistance) && (dB > L.ShadowWrap.minimumWrapDistance);
-        var crossC = (dC > L.ShadowWrap.minimumWrapDistance) && (dD <= L.ShadowWrap.minimumWrapDistance);
-        var crossD = (dC <= L.ShadowWrap.minimumWrapDistance) && (dD > L.ShadowWrap.minimumWrapDistance);
-        
-        if (crossA || crossB || crossC || crossD) {
-            return true;
-        }
-        
-        // if we also want to allow shapes just *near* the cross point to shadow, we need to recalc
-        // each condition individually
-        if (L.ShadowWrap.minimumWrapDistance > 0) {
-            var ccrossA = Math.abs(dA) <= L.ShadowWrap.minimumWrapDistance;
-            var ccrossB = Math.abs(dB) <= L.ShadowWrap.minimumWrapDistance;
-            var ccrossC = Math.abs(dC) <= L.ShadowWrap.minimumWrapDistance;
-            var ccrossD = Math.abs(dD) <= L.ShadowWrap.minimumWrapDistance;
-                
-            if (ccrossA || ccrossB || ccrossC || ccrossD) {
-                return true;
-            }
-        }
-        
-        return false;
-    },
-    
-    checkWrapPoint: function (coord, crossPoints, latlngs, i, LLradius) {
-        var dA = Math.abs(latlngs[i][coord] - crossPoints[0]) - LLradius;
-        var dB = Math.abs(latlngs[i][coord] - crossPoints[1]) - LLradius;
-    
-        var crossA = dA <= L.ShadowWrap.minimumWrapDistance;
-        var crossB = dB <= L.ShadowWrap.minimumWrapDistance;
-        
-        if (crossA || crossB) {
-            return true;
-        }
-        
-        return false;
-    },
-    
-    // here, "normalized" means to force all coordinates to essentially be south (for lat) or east (for lng) of the wrap line
-    normLat: function (latlng) {
-        if (this._map.options.crs.hasOwnProperty('wrapLat')) {
-            var wrapLatMidpoint = (this._map.options.crs.wrapLat[0] + this._map.options.crs.wrapLat[1])/2;
-            if (latlng.lat > wrapLatMidpoint) {
-                latlng.lat = latlng.lat - Math.abs(this._map.options.crs.wrapLat[1] - this._map.options.crs.wrapLat[0]);
-            }
-        }
-        
-        return latlng;
-    },
-
-    normLng: function (latlng) {
-        if (this._map.options.crs.hasOwnProperty('wrapLng')) {
-            var wrapLngMidpoint = (this._map.options.crs.wrapLng[0] + this._map.options.crs.wrapLng[1])/2;
-            if (latlng.lng > wrapLngMidpoint) {
-                latlng.lng = latlng.lng - Math.abs(this._map.options.crs.wrapLng[1] - this._map.options.crs.wrapLng[0]);
-            }
-        }
-        
-        return latlng;
-    },
-
-    // likewise, "mirror" means north (lat) or west (lng)
-    mirrorLat: function (latlng) {
-        if (this._map.options.crs.hasOwnProperty('wrapLat')) {
-            var wrapLatMidpoint = (this._map.options.crs.wrapLat[0] + this._map.options.crs.wrapLat[1])/2;
-            if (latlng.lat <= wrapLatMidpoint) {
-                latlng.lat = latlng.lat + Math.abs(this._map.options.crs.wrapLat[1] - this._map.options.crs.wrapLat[0]);
-            }
-        }
-        
-        return latlng;
-    },
-
-    mirrorLng: function (latlng) {
-        if (this._map.options.crs.hasOwnProperty('wrapLng')) {
-            var wrapLngMidpoint = (this._map.options.crs.wrapLng[0] + this._map.options.crs.wrapLng[1])/2;
-            if (latlng.lng <= wrapLngMidpoint) {
-                latlng.lng = latlng.lng + Math.abs(this._map.options.crs.wrapLng[1] - this._map.options.crs.wrapLng[0]);
-            }
-        }
-        
-        return latlng;
-    },
-    
-    guideLL: function (latlng) {
-        return this[this.shadowOptions.shadowType](latlng);
-    },
-
-    normalizeLL: function (latlng) {
-        var ll = this._map.options.crs.wrapLatLng(L.latLng(latlng));
-        this.normLat(ll);
-        this.normLng(ll);
-        return ll;
-    },
-
-    normLatMirrorLng: function (latlng) {
-        var ll = this._map.options.crs.wrapLatLng(L.latLng(latlng));
-        this.normLat(ll);
-        this.mirrorLng(ll);
-        return ll;
-    },
-
-    mirrorLatNormLng: function (latlng) {
-        var ll = this._map.options.crs.wrapLatLng(L.latLng(latlng));
-        this.mirrorLat(ll);
-        this.normLng(ll);
-        return ll;
-    },
-        
-    mirrorLL: function (latlng) {
-        var ll = this._map.options.crs.wrapLatLng(L.latLng(latlng));
-        this.mirrorLat(ll);
-        this.mirrorLng(ll);
-        return ll;
-    }
-});
-
-// *************************************************************************************
-// *************************************************************************************
-
-// polygon and rect will inherit from polyline, so we only need to include once here
-L.Layer.include({
-    addShadows: function () {
+    addShadows: function (restoreFromCache) {
         if (this.shadowOptions.isShadow) {
             return;
         }
+        
+        if (this.options.noShadow) {
+            delete this.options.noShadow;
+        }
     
-        var isSingle = (this.options.shadowCheckType != 'cross');
+        var isSingle = !(this instanceof L.Polyline);
         var llo = this.calcShadow((isSingle) ? [this._latlng] : this._latlngs);
         
-        // if we've just been added to the map, then our main's shape's coordinates
+        // if we've just been added to the map, then our main shape's coordinates
         // haven't been normalized yet. so we should set them now, using the 
         // coordinates we've just so conveniently calculated
         
+        var shadowType = this.shadowOptions.shadowType;
+        
         if (isSingle) {
-            this._latlng = llo.latlngs.normalizeLL[0];
+            this._latlng = llo.latlngs[shadowType][0];
         }
         else {
             if (this instanceof L.Polyline) {
-                this._setLatLngs__originalPolyline(llo.latlngs.normalizeLL);
+                this._setLatLngs__originalPolyline(llo.latlngs[shadowType]);
             }
             else {
-                this._setLatLngs__originalPolygon(llo.latlngs.normalizeLL);
+                this._setLatLngs__originalPolygon(llo.latlngs[shadowType]);
             }
         }
         
-        this.changeShadows(llo);
+        this.changeShadows(llo, restoreFromCache);
         this._fixShape();
     },
     
@@ -654,29 +456,38 @@ L.Layer.include({
         
         for (var shadowType in this.shadowOptions.shadowShapes) {
             if (this.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
-                this._removeShadow(shadowType);
+                this._removeShadowShape(shadowType);
             }
         }
     },
     
     // add or remove any shadows based on calculations done by calcShadow
-    changeShadows: function (llo) {
+    changeShadows: function (llo, restoreFromCache) {
+        var changed = {};
         if (this.shadowOptions.isShadow) {
-            return;
+            return changed;
+        }
+        
+        if (this.shadowOptions.blockChanges) {
+            return changed;
         }
     
-        var changed = {};
         for (var shadowType in llo.needsShadow) {
             if (llo.needsShadow.hasOwnProperty(shadowType)) {
+                if (shadowType == this.shadowOptions.shadowType) {
+                    continue;
+                }
+            
                 var n = llo.needsShadow[shadowType];
                 var o = this.shadowOptions.shadowShapes.hasOwnProperty(shadowType);
+                
                 if (n && !o) {
                     changed[shadowType] = true;
-                    this._addShadow(shadowType, llo.latlngs[shadowType]);
+                    this._addShadow(shadowType, llo.latlngs[shadowType], restoreFromCache);
                 }
                 else if (!n && o) {
                     changed[shadowType] = true;
-                    this._removeShadow(shadowType);
+                    this._removeShadowShape(shadowType);
                 }
             }
         }
@@ -697,6 +508,10 @@ L.Layer.include({
                 var passedArgs = L.ShadowWrap.translateArgs(shadowShape, translate, args);
                 shadowShape[dispatchedMethodName].apply(shadowShape, passedArgs);
                 shadowShape.shadowOptions.secondaryExecutor = false;
+                    
+                if (translate !== null) {
+                    shadowShape._fixShape();
+                }
             }
         }
     },
@@ -704,7 +519,7 @@ L.Layer.include({
     // first, update our latlngs, create/remove any shadows that need be, and then dispatch
     // our method call to whatever shadow shapes our main shape has
     updatingShadowDispatch: function (dispatchedMethodName, useArgs, translate, args, latlngs) {
-        var isSingle = (this.options.shadowCheckType != 'cross');
+        var isSingle = !(this instanceof L.Polyline);
         var llo = this.calcShadow(latlngs);
         var changed = this.changeShadows(llo);
         
@@ -717,15 +532,20 @@ L.Layer.include({
                 var shadowShape = this.shadowOptions.shadowShapes[shadowType];
                 shadowShape.shadowOptions.secondaryExecutor = true;
                 
+                var targs = args;
                 if (useArgs) {
-                    args = L.ShadowWrap.translateArgs(this, translate, args);
+                    targs = L.ShadowWrap.translateArgs(shadowShape, translate, args);
                 }
                 else if (useArgs === false) {
-                    args = (isSingle) ? llo.latlngs[shadowType] : [llo.latlngs[shadowType]];
+                    targs = (isSingle) ? llo.latlngs[shadowType] : [llo.latlngs[shadowType]];
                 }
                 
-                shadowShape[dispatchedMethodName].apply(shadowShape, args);
+                shadowShape[dispatchedMethodName].apply(shadowShape, targs);
                 shadowShape.shadowOptions.secondaryExecutor = false;
+                
+                if (translate !== null) {
+                    shadowShape._fixShape();
+                }
             }
         }
         
@@ -775,32 +595,42 @@ L.Layer.include({
     },
     
     // actually create the shadow shape
-    _addShadow: function (shadowType, latlngs) {
+    _addShadow: function (shadowType, latlngs, restoreFromCache) {
         var cls = Object.getPrototypeOf(this).constructor;
-        
-        var shadowOpts = L.extend({}, this.options);
-        delete shadowOpts.nonBubblingEvents;
-        shadowOpts.isShadow = true;
-        
         var shadowShape;
-        if (this instanceof L.CircleMarker) {
-            shadowShape = new cls(latlngs[0], this.options.radius, shadowOpts);
+        
+        if ((restoreFromCache === true) && this.hasOwnProperty('_shadowCache') && this._shadowCache.hasOwnProperty(shadowType)) {
+            shadowShape = this._shadowCache[shadowType][0];
+            shadowShape._events = this._shadowCache[shadowType][1];
+            shadowShape._map = null;
+            delete this._shadowCache[shadowType];
         }
-        else if (this instanceof L.Marker) {
-            shadowShape = new cls(latlngs[0], shadowOpts);
-        }
+        
         else {
-            shadowShape = new cls(latlngs, shadowOpts);
-        }
-        
-        this.shadowOptions.shadowShapes[shadowType] = shadowShape;
-        shadowShape.shadowOptions.mainShape = this;
-        shadowShape.shadowOptions.isShadow = true;
-        shadowShape.shadowOptions.shadowType = shadowType;
-        
-        for (var i=0; i<L.ShadowWrap.EventsToShadow.length; i++) {
-            var eventName = L.ShadowWrap.EventsToShadow[i];
-            this._makeShadowEventHandler(shadowType, eventName);
+            var shadowOpts = L.extend({}, this.options);
+            delete shadowOpts.nonBubblingEvents;
+            shadowOpts.isShadow = true;
+            
+            if (this instanceof L.CircleMarker) {
+                shadowShape = new cls(latlngs[0], this.options.radius, shadowOpts);
+            }
+            else if (this instanceof L.Marker) {
+                shadowShape = new cls(latlngs[0], shadowOpts);
+            }
+            else {
+                shadowShape = new cls(latlngs, shadowOpts);
+            }
+            
+            for (var i=0; i<L.ShadowWrap.EventsToShadow.length; i++) {
+                var eventName = L.ShadowWrap.EventsToShadow[i];
+                this._makeShadowEventHandler(shadowType, shadowShape, eventName);
+            }
+            
+            this.shadowOptions.shadowShapes[shadowType] = shadowShape;
+            
+            shadowShape.shadowOptions.mainShape = this;
+            shadowShape.shadowOptions.isShadow = true;
+            shadowShape.shadowOptions.shadowType = shadowType;
         }
         
         shadowShape.addTo(this._map);
@@ -812,12 +642,25 @@ L.Layer.include({
         });
     },
     
-    _makeShadowEventHandler: function (shadowType, eventName) {
+    _makeShadowEventHandler: function (shadowType, shadowShape, eventName) {
         var that = this;
-        var shadowShape = this.shadowOptions.shadowShapes[shadowType];
         
         shadowShape.on(eventName, function () {
             var args = Array.prototype.slice.call(arguments);
+            
+            if (args.length > 0) {
+                args[0]._shadowDispatched = true;
+                args[0]._shadowDispatchType = shadowType;
+                args[0]._shadowDispatchShape = shadowShape;
+            }
+            else {
+                args = [{
+                    '_shadowDispatched': true,
+                    '_shadowDispatchType': shadowType,
+                    '_shadowDispatchShape': shadowShape,
+                }];
+            }
+            
             args.unshift(eventName);
             that.fire.apply(that, args);
         }, this);
@@ -833,35 +676,41 @@ L.Layer.include({
         }
     },
     
-    _removeShadow: function (shadowType) {
+    _removeShadowShape: function (shadowType) {
         if (this.shadowOptions.isShadow) {
             return;
         }
         
         var shadowShape = this.shadowOptions.shadowShapes[shadowType];
+        if (! this.hasOwnProperty('_shadowCache')) {
+            this._shadowCache = {};
+        }
+        
+        var events = shadowShape._events;
+        shadowShape.off();
         shadowShape.removeFrom(shadowShape._map);
+        this._shadowCache[shadowType] = [shadowShape, events];
+        delete this.shadowOptions.shadowShapes[shadowType];
+        
         this.fire('shadowRemoved', {
             'shadowLayer': shadowShape,
             'shadowType': shadowShape.shadowOptions.shadowType
         });
-        
-        delete this.shadowOptions.shadowShapes[shadowType];
     },
     
     // use this to permanently remove shadowing from a shape
-    unShadow: function () {
+    unshadow: function () {
         if (this.options.noShadow) {
             return;
         }
         
         if (this.shadowOptions.isShadow) {
-            return this.shadowOptions.mainShape.unShadow();
+            return this.shadowOptions.mainShape.unshadow();
         }
         
         for (var shadowType in this.shadowOptions.shadowShapes) {
             if (this.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
-                var shadowShape = this.shadowOptions.shadowShapes[shadowType];
-                shadowShape.removeFrom(shadowShape._map);
+                this._removeShadowShape(shadowType);
             }
         }
         
@@ -870,242 +719,551 @@ L.Layer.include({
         this.off('add', this.addShadows, this);
         this.off('remove', this.removeAllShadows, this);
         this.options.noShadow = true;
-    }
-});
-
-// *************************************************************************************
-// *************************************************************************************
-// extra stuff to get leaflet draw to work right
-
-L.ShadowWrap.Draw = {
-    
-    // propagate changes in the shape to leaflet.draw's edit markers
-    'shadowUpdate': function (refShape, shape) {
-        if (shape.options.noShadow) {
-            return;
-        }
-    
-        if (shape instanceof L.Marker) {
-            return;
-        }
-        
-        shape.editing._moveMarker.setLatLng(shape.guideLL(refShape.editing._moveMarker._latlng));
-        
-        if (shape.editing._repositionCornerMarkers) {
-            shape.editing._repositionCornerMarkers();
-            return;
-        }
-        
-        if (shape.editing._getResizeMarkerPoint) {
-            shape.editing._resizeMarkers[0].setLatLng(shape.guideLL(refShape.editing._resizeMarkers[0]._latlng));
-            return;
-        }
-
     },
     
-    'fixDrawMarkers': function (shape) {
-        if (shape instanceof L.Marker) {
-            return;
-        }
-        
-        L.ShadowWrap.Draw.fixDrawMarker(shape, shape.editing._moveMarker);
-        for (var j=0; j<shape.editing._resizeMarkers.length; j++) {
-            L.ShadowWrap.Draw.fixDrawMarker(shape, shape.editing._resizeMarkers[j]);
-        }
-    },
-    
-    'fixDrawMarker': function (shape, marker) {
-        marker.unShadow();
-        
-        if (! shape.options.noShadow) {
-            marker._latlng = shape.guideLL(marker._latlng);
-            marker.update();
-        }
-    },
-    
-    // propagate edit changes done to a main shape to the shadows, and vice versa
-    'shadowHooks': function (shape, skip) {
-        if ((!shape.editing) || (!shape.shadowOptions)) {
-            return;
-        }
-        
-        if (shape.shadowOptions.isShadow) {
-            L.ShadowWrap.Draw.shadowUpdate(shape, shape.shadowOptions.mainShape);
-            L.ShadowWrap.Draw.shadowHooks(shape.shadowOptions.mainShape, shape.shadowOptions.shadowType);
-            return;
-        }
-            
-        for (var shadowType in shape.shadowOptions.shadowShapes) {
-            if (shape.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
-                if (skip == shadowType) {
-                    continue;
-                }
+    // use this to restore shadowshapes removed at a previous time via .unshadow()
+    // intended for times when you want to temporarily remove shadowshapes for some operation
+    reshadow: function () {
+        this.unshadow();
+        delete this.options.noShadow;
                 
-                L.ShadowWrap.Draw.shadowUpdate(shape, shape.shadowOptions.shadowShapes[shadowType]);
-            }
-        }
+        this.shadowOptions = {
+            'isShape': true,
+            'shadowShapes': {},
+            'shadowSplit': false,
+            'shadowType': 'normalizeLL',
+            'isShadow': false,
+            'secondaryExecutor': false,
+            'blockChanges': false
+        };
+        
+        this.on('add', this.addShadows, this);
+        this.on('remove', this.removeAllShadows, this);
+        
+        this.addShadows(true);
     },
     
-    // update shadow/main shape as vice versa is edited
-    'initializeShadowHooks': function () {
+    blockShadowChanges: function () {
         if (this.options.noShadow) {
             return;
         }
         
-        var that = this;
-        var h = function () {
-            L.ShadowWrap.Draw.shadowHooks(that);
-        };
-        
-        this.on('move', h);
-        this.on('resize', h);
-        this.on('edit', h);
-    },
-        
-    // hook into leaflet.draw and leaflet.snap: add and remove shadow layers to drawnitems and the
-    // guideLayers as each such action is performed on the main shape.
-    'processDrawnItem': function (drawnItems, snapGuideLayers, layer) {
-        drawnItems.addLayer(layer);
-        if (snapGuideLayers) {
-            snapGuideLayers.push(layer);
+        if (this.shadowOptions.isShadow) {
+            return this.shadowOptions.mainShape.blockShadowChanges();
         }
         
-        if (layer.hasOwnProperty('shadowOptions')) {
-            for (var shadowType in layer.shadowOptions.shadowShapes) {
-                if (layer.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
-                    var shadowShape = layer.shadowOptions.shadowShapes[shadowType];
-                    
-                    drawnItems.addLayer(shadowShape);
-                    if (snapGuideLayers) {
-                        snapGuideLayers.push(shadowShape);
-                    }
-                }
+        this.shadowOptions.blockChanges = true;
+        for (var shadowType in this.shadowOptions.shadowShapes) {
+            if (this.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
+                this.shadowOptions.shadowShapes[shadowType].blockChanges = true;
             }
         }
-        
-        layer.on('shadowAdded', function (e) {
-            drawnItems.addLayer(e.shadowLayer);
-            if (snapGuideLayers) {
-                snapGuideLayers.push(e.shadowLayer);
-            }
-        });
-        
-        layer.off('shadowRemoved', function (e) {
-            drawnItems.removeLayer(e.shadowLayer);
-            if (snapGuideLayers) {
-                var slid = L.stamp(e.shadowLayer);
-                
-                for (var i=0; i<snapGuideLayers.length; i++) {
-                    if (L.stamp(snapGuideLayers[i]) == slid) {
-                        snapGuideLayers.splice(i, 1);
-                        break;
-                    }
-                }
-            }
-        });
     },
     
-    'fixDrawnPoly': function (layer, latestMarker) {
-        L.ShadowWrap.Draw.fixDrawMarker(layer, latestMarker);
-        
-        for (var shadowType in layer.shadowOptions.shadowShapes) {
-            if (layer.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
-                var shadowShape = layer.shadowOptions.shadowShapes[shadowType];
-                var sl = shadowShape._latlngs.length;
-                
-                shadowShape._latlngs[sl-1] = layer[shadowType](shadowShape._latlngs[sl-1]);
-                if (sl >= 2) {
-                    shadowShape.redraw();
-                }
-            }
+    unblockShadowChanges: function () {
+        if (this.options.noShadow) {
+            return;
         }
         
-        //layer.redraw();
-    },
-    
-    'hookCallbacks': function (drawnItems, snapGuideLayers) {
-        drawnItems._map.on(L.Draw.Event.CREATED, function (e) {
-            L.ShadowWrap.Draw.processDrawnItem(drawnItems, snapGuideLayers, e.layer);
-        });
-        
-        drawnItems._map.on(L.Draw.Event.EDITHOOK, function (e) {
-            L.ShadowWrap.Draw.fixDrawMarkers(e.layer);
-        });
-        
-        drawnItems._map.on(L.Draw.Event.DRAWVERTEX, function (e) {
-            var layer = e.drawHandler._poly;
-            if (layer.options.noShadow) {
-                return;
-            }
+        var shadowType;
+        var referenceShape = (this.shadowOptions.isShadow) ? this.shadowOptions.mainShape : this;
+        referenceShape.shadowOptions.blockChanges = false;
             
-            var latestMarker = e.drawHandler._markers[e.drawHandler._markers.length-1];
-            
-            if (! layer._map) {
-                layer._map = drawnItems._map;
-                L.ShadowWrap.Draw.fixDrawnPoly(layer, latestMarker);
-                delete layer._map;
+        for (shadowType in referenceShape.shadowOptions.shadowShapes) {
+            if (referenceShape.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
+                referenceShape.shadowOptions.shadowShapes[shadowType].blockChanges = false;
             }
-            else {
-                L.ShadowWrap.Draw.fixDrawnPoly(layer, latestMarker);
-            }
-        });
-        
-        drawnItems._map.on(L.Draw.Event.DRAWSTART, function (e) {
-            var handler = L.toolbar._toolbars.draw._modes[e.layerType].handler;
-            if (handler._mouseMarker) {
-                handler._mouseMarker.unShadow();
-            }
-        });
-    },
+        }
     
-    // to be called from main.js, or whatever
-    'hookLeafletDraw': function (drawnItems, snapGuideLayers, initialShapeList) {
-        if ((initialShapeList === null) || (typeof(initialShapeList) == 'undefined')) {
-            initialShapeList = [];
-        }
-        
-        for (var i=0; i<initialShapeList.length; i++) {
-            L.ShadowWrap.Draw.processDrawnItem(drawnItems, snapGuideLayers, initialShapeList[i]);
-        }
-        
-        if (drawnItems._map) {
-            L.ShadowWrap.Draw.hookCallbacks(drawnItems, snapGuideLayers);
+        if (this._latlng) {
+            referenceShape._latlng = referenceShape.guideLL(this._latlng);
         }
         else {
-            drawnItems.on('add', function () {
-                L.ShadowWrap.Draw.hookCallbacks(drawnItems, snapGuideLayers);
-            });
+            referenceShape.setLatLngs(referenceShape.guideLLs(this._latlngs));
         }
-    }
-};
-
-L.ShadowWrap.hookLeafletDraw = L.ShadowWrap.Draw.hookLeafletDraw;
-
-// *************************************************************************************
-// *************************************************************************************
-
-// the main installation method, to be manually called in your main.js or whatever
-// (the manual call is so that you can add stuff to L.ShadowWrap.EventsToShadow and
-// L.ShadowWrap.MethodsToWrap if you have some sort of other plugin, or whatever)
-L.ShadowWrap.initialize = function () {
-    // for leaflet.textpath.js
-    if (L.Polyline.prototype.hasOwnProperty('setText')) {
-        L.ShadowWrap.MethodsToWrap['L.Polyline'].simple.push('setText');
-    }
-
-    for (var className in L.ShadowWrap.MethodsToWrap) {
-        if (L.ShadowWrap.MethodsToWrap.hasOwnProperty(className)) {
-            L.ShadowWrap.installShadowHooks(className, L.ShadowWrap.MethodsToWrap[className]);
+        
+        for (shadowType in referenceShape.shadowOptions.shadowShapes) {
+            if (referenceShape.shadowOptions.shadowShapes.hasOwnProperty(shadowType)) {
+                referenceShape.shadowOptions.shadowShapes[shadowType]._fixShape();
+            }
         }
-    }
         
-    // for leaflet.draw.js
-    if (L.Control.Draw) {
-        L.Marker.addInitHook(L.ShadowWrap.Draw.initializeShadowHooks);
-        L.CircleMarker.addInitHook(L.ShadowWrap.Draw.initializeShadowHooks);
-        L.Polyline.addInitHook(L.ShadowWrap.Draw.initializeShadowHooks);
+        referenceShape._fixShape();
+    },
+});
+/* globals L:true */
+
+L.Layer.include({
+    calcShadow: function (latlngs) {
+        L.ShadowWrap.minimumWrapDistance = Math.abs(L.ShadowWrap.minimumWrapDistance);
         
-        L.ShadowWrap.addShadowException('L.Path', 'setStyle', L.Edit.SimpleShape.prototype.removeHooks);
-        L.ShadowWrap.addShadowException('L.Path', 'setStyle', L.Edit.PolyVerticesEdit.prototype.removeHooks);
+        var result = {
+            'needsShadow': {
+                'normalizeLL': false,
+                'normLatMirrorLng': false,
+                'mirrorLatNormLng': false,
+                'mirrorLL': false
+            },
+            'latlngs': {
+                'normalizeLL': [],
+                'mirrorLatNormLng': [],
+                'normLatMirrorLng': [],
+                'mirrorLL': []
+            }
+        };
+        
+        result.needsShadow[this.shadowOptions.shadowType] = true;
+        result.latlngs[this.shadowOptions.shadowType] = latlngs;
+    
+        if ((!this._map) || (!this.shadowOptions.isShape)) {
+            return result;
+        }
+        
+        result.latlngs[this.shadowOptions.shadowType] = [];
+        return this._calcShadow(result, latlngs);
+    },
+    
+    _calcShadow: function (result, latlngs) {
+        var crossingInfo = this.detectShadowSpaces(latlngs);
+        crossingInfo.center = {'lat': 0, 'lng': 0};
+        
+        if (this.shadowOptions.blockChanges) {
+            crossingInfo.crossLat = this.shadowOptions.shadowShapes.hasOwnProperty('mirrorLatNormLng');
+            crossingInfo.crossLng = this.shadowOptions.shadowShapes.hasOwnProperty('normLatMirrorLng');
+        }
+        
+        result.needsShadow.normalizeLL = true;
+        
+        if (crossingInfo.crossLng) {
+            result.needsShadow.normLatMirrorLng = true;
+        }
+        if (crossingInfo.crossLat) {
+            result.needsShadow.mirrorLatNormLng = true;
+        }
+        if (crossingInfo.crossLat && crossingInfo.crossLng) {
+            result.needsShadow.mirrorLL = true;
+        }
+        
+        var wrappedLLs = [];
+        var len = 0;
+        
+        if (crossingInfo.isFlat) {
+            wrappedLLs = this.wrapLLs(crossingInfo, latlngs);
+            len = wrappedLLs.length;
+        }
+        else {
+            for (var i=0; i<latlngs.length; i++) {
+                var subnormLLs = this.wrapLLs(crossingInfo, latlngs[i]);
+                wrappedLLs.push(subnormLLs);
+                len += subnormLLs.length;
+            }
+        }
+    
+        this.calcMirrorInfo(crossingInfo, len);
+        this.shadowOptions.crossingInfo = crossingInfo;
+        result.latlngs = this.convertLatLngs(wrappedLLs, crossingInfo.isFlat);
+        
+        return result;
+    },
+    
+    wrapLLs: function (crossingInfo, latlngs) {
+        var wrapLLs = [];
+        
+        for (var i=0; i<latlngs.length; i++) {
+            var wrapLL = this._map.options.crs.wrapLatLng(L.latLng(latlngs[i]));
+            wrapLLs.push(wrapLL);
+            
+            if (crossingInfo.crossLat) {
+                crossingInfo.center.lat += wrapLL.lat;
+            }
+            if (crossingInfo.crossLng) {
+                crossingInfo.center.lng += wrapLL.lng;
+            }
+        }
+        
+        return wrapLLs;
+    },
+    
+    calcMirrorInfo: function (crossingInfo, len) {
+        var crs = this._map.options.crs;
+        
+        crossingInfo.diff = {'lat': 0, 'lng': 0};
+        crossingInfo.diffMid = {'lat': 0, 'lng': 0};
+        
+        if (crossingInfo.crossLat) {
+            crossingInfo.diff.lat = Math.abs(crs.wrapLat[1] - crs.wrapLat[0]);
+            crossingInfo.diffMid.lat = (crs.wrapLat[1] + crs.wrapLat[0])/2;
+            
+            crossingInfo.center.lat /= len;
+            
+            if (crossingInfo.center.lat >= crossingInfo.diffMid.lat) {
+                crossingInfo.ca = true;
+            }
+            else if (crossingInfo.center.lat < crossingInfo.diffMid.lat) {
+                crossingInfo.cb = true;
+            }
+        }
+        
+        if (crossingInfo.crossLng) {
+            crossingInfo.diff.lng = Math.abs(crs.wrapLng[1] - crs.wrapLng[0]);
+            crossingInfo.diffMid.lng = (crs.wrapLng[1] + crs.wrapLng[0])/2;
+            
+            crossingInfo.center.lng /= len;
+            if (crossingInfo.center.lng >= crossingInfo.diffMid.lng) {
+                crossingInfo.cc = true;
+            }
+            else if (crossingInfo.center.lng < crossingInfo.diffMid.lng) {
+                crossingInfo.cd = true;
+            }
+        }
+        
+        return crossingInfo;
+    },
+    
+    convertLatLngs: function (wrapLLs, isFlat) {
+        var result = {
+            'normalizeLL': [],
+            'normLatMirrorLng': [],
+            'mirrorLatNormLng': [],
+            'mirrorLL': []
+        };
+      
+        var i;
+        if (isFlat) {
+            for (i=0; i<wrapLLs.length; i++) {
+                this.convertLatLng(result, wrapLLs[i]);
+            }
+        }
+        else {
+            for (i=0; i<wrapLLs.length; i++) {
+                var subResult = this.convertLatLngs(wrapLLs[i], true);
+                for (var shadowType in result) {
+                    if (result.hasOwnProperty(shadowType)) {
+                        result[shadowType].push(subResult[shadowType]);
+                    }
+                }
+            }
+        }
+        
+        return result;
+    },
+    
+    convertLatLng: function (result, latlng) {
+        if (this.shadowOptions.crossingInfo.crossLat) {
+            result.mirrorLatNormLng.push(this._mirrorLatNormLng(latlng));
+        }
+        
+        if (this.shadowOptions.crossingInfo.crossLng) {
+            result.normLatMirrorLng.push(this._normLatMirrorLng(latlng));
+        }
+        
+        if (this.shadowOptions.crossingInfo.crossLat && this.shadowOptions.crossingInfo.crossLng) {
+            result.mirrorLL.push(this._mirrorLL(latlng));
+        }
+        
+        result.normalizeLL.push(this._normalizeLL(latlng));
+    },
+    
+    // ******************************************************************************
+    // ******************************************************************************
+    
+    checkWrapZone: function (llv, LLradius, crossPoints) {
+        var side0 = this._checkWrapZone(llv, LLradius, crossPoints[0]);
+        if (side0) {
+            return true;
+        }
+        
+        return this._checkWrapZone(llv, LLradius, crossPoints[1]);
+    },
+    
+    // check to see if a circle is on two sides of a wrap line (or within the bonus wrap zone)
+    // if LLradius = 0, we're checking a point, not a circle
+    _checkWrapZone: function (llv, LLradius, crossPoint) {
+        var d = llv - crossPoint;
+        
+        var dA = d - LLradius;
+        var dB = d + LLradius;
+        
+        var crossA = (dA <= L.ShadowWrap.minimumWrapDistance) && (dB > -L.ShadowWrap.minimumWrapDistance);
+        var crossB = (dB <= L.ShadowWrap.minimumWrapDistance) && (dA > -L.ShadowWrap.minimumWrapDistance);
+        
+        return (crossA || crossB);
+    },
+    
+    normalizeLL: function (rawLatLng) {
+        var latlng = this._map.options.crs.wrapLatLng(L.latLng(rawLatLng));
+        return this._normalizeLL(latlng);
+    },
+
+    _normalizeLL: function (latlng) {
+        var lat = this._normLat(latlng.lat);
+        var lng = this._normLng(latlng.lng);
+        return new L.LatLng(lat, lng);
+    },
+
+    normLatMirrorLng: function (rawLatLng) {
+        var latlng = this._map.options.crs.wrapLatLng(L.latLng(rawLatLng));
+        return this._normLatMirrorLng(latlng);
+    },
+
+    _normLatMirrorLng: function (latlng) {
+        var lat = this._normLat(latlng.lat);
+        var lng = this._mirrorLng(latlng.lng);
+        return new L.LatLng(lat, lng);
+    },
+    
+    mirrorLatNormLng: function (rawLatLng) {
+        var latlng = this._map.options.crs.wrapLatLng(L.latLng(rawLatLng));
+        return this._mirrorLatNormLng(latlng);
+    },
+    
+    _mirrorLatNormLng: function (latlng) {
+        var lat = this._mirrorLat(latlng.lat);
+        var lng = this._normLng(latlng.lng);
+        return new L.LatLng(lat, lng);
+    },
+    
+    mirrorLL: function (rawLatLng) {
+        var latlng = this._map.options.crs.wrapLatLng(L.latLng(rawLatLng));
+        return this._mirrorLL(latlng);
+    },
+    
+    _mirrorLL: function (latlng) {
+        var lat = this._mirrorLat(latlng.lat);
+        var lng = this._mirrorLng(latlng.lng);
+        return new L.LatLng(lat, lng);
+    },
+    
+    _normLat: function (lat) {
+        if (this.shadowOptions.crossingInfo.ca && (lat < this.shadowOptions.crossingInfo.diffMid.lat)) {
+            lat += this.shadowOptions.crossingInfo.diff.lat;
+        }
+        else if (this.shadowOptions.crossingInfo.cb && (lat >= this.shadowOptions.crossingInfo.diffMid.lat)) {
+            lat -= this.shadowOptions.crossingInfo.diff.lat;
+        }
+        
+        return lat;
+    },
+    
+    _normLng: function (lng) {
+        if (this.shadowOptions.crossingInfo.cc && (lng < this.shadowOptions.crossingInfo.diffMid.lng)) {
+            lng += this.shadowOptions.crossingInfo.diff.lng;
+        }
+        else if (this.shadowOptions.crossingInfo.cd && (lng > this.shadowOptions.crossingInfo.diffMid.lng)) {
+            lng -= this.shadowOptions.crossingInfo.diff.lng;
+        }
+        
+        return lng;
+    },
+    
+    _mirrorLat: function (lat) {
+        if (this.shadowOptions.crossingInfo.cb && (lat < this.shadowOptions.crossingInfo.diffMid.lat)) {
+            lat += this.shadowOptions.crossingInfo.diff.lat;
+        }
+        else if (this.shadowOptions.crossingInfo.ca && (lat > this.shadowOptions.crossingInfo.diffMid.lat)) {
+            lat -= this.shadowOptions.crossingInfo.diff.lat;
+        }
+        
+        return lat;
+    },
+    
+    _mirrorLng: function (lng) {
+        if (this.shadowOptions.crossingInfo.cd && (lng < this.shadowOptions.crossingInfo.diffMid.lng)) {
+            lng += this.shadowOptions.crossingInfo.diff.lng;
+        }
+        else if (this.shadowOptions.crossingInfo.cc && (lng > this.shadowOptions.crossingInfo.diffMid.lng)) {
+            lng -= this.shadowOptions.crossingInfo.diff.lng;
+        }
+        
+        return lng;
+    },
+        
+    // ******************************************************************************
+    // ******************************************************************************
+    
+    // take a coordinate and put it in proper context for this shape
+    guideLL: function (rawLatLng) {
+        if (this.options.noShadow) {
+            return rawLatLng;
+        }
+    
+        var referenceShape = (this.shadowOptions.isShadow) ? this.shadowOptions.mainShape : this;
+        
+        if (!referenceShape.shadowOptions.hasOwnProperty('crossingInfo')) {
+            this.calcShadow();
+        }
+        
+        return referenceShape[this.shadowOptions.shadowType](rawLatLng);
+    },
+        
+    guideLLs: function (rawLatLngs) {
+        if (this.options.noShadow) {
+            return rawLatLngs;
+        }
+    
+        var referenceShape = (this.shadowOptions.isShadow) ? this.shadowOptions.mainShape : this;
+        var isSingle = !(this instanceof L.Polyline);
+        referenceShape.calcShadow((isSingle) ? [this._latlng] : this._latlngs);
+        
+        var i;
+        var latlng;
+        var guided = [];
+        
+        if (referenceShape.shadowOptions.crossingInfo.isFlat) {
+            for (i=0; i<rawLatLngs.length; i++) {
+                latlng = referenceShape[this.shadowOptions.shadowType](rawLatLngs[i]);
+                guided.push(latlng);
+            }
+        }
+        else {
+            for (var j=0; j<rawLatLngs.length; j++) {
+                var subGuided = [];
+                for (i=0; i<rawLatLngs[j].length; i++) {
+                    latlng = referenceShape[this.shadowOptions.shadowType](rawLatLngs[j][i]);
+                    subGuided.push(latlng);
+                }
+                
+                guided.push(subGuided);
+            }
+        }
+        
+        return guided;
     }
-};
+});
+
+/*
+    implement a "detectShadowSpaces" for each layer-type class, which determines if there should exist
+    a shadow near each wrap axis
+*/
+
+L.Marker.include({
+    detectShadowSpaces: function (latlngs) {
+        var ll = L.latLng(latlngs[0]);
+        var crossingInfo = {
+            'crossLat': false,
+            'crossLng': false,
+            'isFlat':  true
+        };
+        
+        if (this._map.options.crs.hasOwnProperty('wrapLat')) {
+            crossingInfo.crossLat = this.checkWrapZone(ll.lat, 0, this._map.options.crs.wrapLat);
+        }
+        
+        if (this._map.options.crs.hasOwnProperty('wrapLng')) {
+            crossingInfo.crossLng = this.checkWrapZone(ll.lng, 0, this._map.options.crs.wrapLng);
+        }
+        
+        return crossingInfo;
+    }
+});
+
+L.CircleMarker.include({
+    detectShadowSpaces: function (latlngs) {
+        var ll = L.latLng(latlngs[0]);
+        var crossingInfo = {
+            'crossLat': false,
+            'crossLng': false,
+            'isFlat':  true
+        };
+        
+        var LLradius = this.getLLRadius();
+        
+        if (this._map.options.crs.hasOwnProperty('wrapLat')) {
+            crossingInfo.crossLat = this.checkWrapZone(ll.lat, LLradius, this._map.options.crs.wrapLat);
+        }
+        
+        if (this._map.options.crs.hasOwnProperty('wrapLng')) {
+            crossingInfo.crossLng = this.checkWrapZone(ll.lng, LLradius, this._map.options.crs.wrapLng);
+        }
+        
+        return crossingInfo;
+    },
+    
+    getLLRadius: function () {
+        var radius = this.getRadius();
+    
+        if (this instanceof L.Circle) {
+            // circle uses a radius in kilometers on earth maps
+            if (this._map.options.crs.hasOwnProperty('R') && (this._map.options.crs.R !== null)) {
+                return radius*(180/Math.PI/this._map.options.crs.R);
+            }
+            
+            return radius;
+        }
+        
+        else { // circlemarker gives a radius in pixels
+            return Math.abs(this._map.unproject([radius, 0]).lng - this._map.unproject([0, 0]).lng);
+        }
+        
+        return radius;
+    }
+});
+
+L.Polyline.include({
+    detectShadowSpaces: function (latlngs) {
+        var crossingInfo = {
+            'crossLat': false,
+            'crossLng': false,
+            'isFlat':  L.LineUtil.isFlat(latlngs)
+        };
+        
+        if (crossingInfo.isFlat) {
+            if (this._map.options.crs.hasOwnProperty('wrapLat')) {
+                crossingInfo.crossLat = this._detectShadowSpaces('lat', latlngs, this._map.options.crs.wrapLat);
+            }
+            
+            if (this._map.options.crs.hasOwnProperty('wrapLng')) {
+                crossingInfo.crossLng = this._detectShadowSpaces('lng', latlngs, this._map.options.crs.wrapLng);
+            }
+        }
+        else {
+            for (var i=0; i<latlngs.length; i++) {
+                var innerCrossingInfo = this.detectShadowSpaces(latlngs[i]);
+                crossingInfo.crossLat = crossingInfo.crossLat || innerCrossingInfo.crossLat;
+                crossingInfo.crossLng = crossingInfo.crossLng || innerCrossingInfo.crossLng;
+            }
+        }
+        
+        return crossingInfo;
+    },
+    
+    _detectShadowSpaces: function (coordType, latlngs, crossPoints) {
+        var pointLeft = false;
+        var pointRight = false;
+        
+        var meridian = (crossPoints[0] + crossPoints[1])/2;
+        var meridianLeft = meridian - L.ShadowWrap.minimumWrapDistance;
+        var meridianRight = meridian + L.ShadowWrap.minimumWrapDistance;
+        
+        var OKzoneLeft = crossPoints[0]/2;
+        var OKzoneRight = crossPoints[1]/2;
+        
+        var forceZoneLeft = crossPoints[0] + L.ShadowWrap.minimumWrapDistance;
+        var forceZoneRight = crossPoints[1] - L.ShadowWrap.minimumWrapDistance;
+        
+        // algorithm we're looking for either a.) at least one point on each side of the antimeridian,
+        // or b.) at least one point within the range between the antimeridian and L.ShadowWrap.minimumWrapDistance
+        for (var i=0; i<latlngs.length; i++) {
+            var ll = L.latLng(latlngs[i]);
+            var llv = L.Util.wrapNum(ll[coordType], crossPoints, true);
+            
+            if ((llv <= forceZoneLeft) || (llv >= forceZoneRight)) {
+                return true;
+            }
+            
+            // if a point is closer to the prime meridian than the antimeridian, we ignore it
+            if ((llv >= OKzoneLeft) && (llv <= OKzoneRight)) {
+                continue;
+            }
+        
+            if (llv < meridianRight) {
+                pointLeft = true;
+            }
+            if (llv > meridianLeft) {
+                pointRight = true;
+            }
+        }
+        
+        return pointLeft && pointRight;
+    }
+});

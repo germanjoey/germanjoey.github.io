@@ -10,7 +10,8 @@
         <script type="text/javascript" src="lib/leaflet.js"></script>
         <script type="text/javascript" src="lib/leaflet.draw-custom.js"></script>
         
-        <script type="text/javascript" src="../leaflet.shadowwrap.js"></script>
+        <script type="text/javascript" src="../dist/leaflet.shadowwrap.js"></script>
+        <script type="text/javascript" src="../dist/leaflet.shadowwrap.draw.js"></script>
     </head>
     
     <body>
@@ -75,12 +76,19 @@
         var us_marker = L.marker([36.5, -119]);
         us_marker.bindPopup('36.5, -119');
         
-        var r = new L.Rectangle([[-29.5, -139], [36.5, 153]]);
+        var r1 = new L.Rectangle([[-29.5, -139], [36.5, 153]]);
+        var r2 = new L.Rectangle([[-29.5, -10], [35.5, 10]]);
         var c = new L.Circle([-29, -177], 2000000);
         
-        var initialLayers = [nz_marker, us_marker, r, c];
-        L.ShadowWrap.hookLeafletDraw(drawnItems, [], initialLayers);
+        var initialLayers = [nz_marker, us_marker, r1, r2, c];
+        L.ShadowWrap.hookLeafletDraw(drawControl, drawnItems, [], initialLayers);
         
         </script>
+        <p>
+        This second demo shows how Leaflet.ShadowWrap fixes things. The rectangle wraps across correctly across the dateline, and you can pan across it without shapes mysteriously disappearing. You can now draw over the dateline without your shapes disappearing, and edit without things going haywire.
+        </p>
+        <p>
+        Compare to: <a href="https://germanjoey.github.io/leaflet.shadowwrap/demo1.html">demo 1</a>.
+        </p>
     </body>
 </html>

@@ -1,0 +1,1931 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>Civ4 Map Cad Debugging Window</title>
+	<link href="debug/jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet">
+	<link href="debug/style.css" rel="stylesheet">
+	<style>
+
+    </style>
+
+</head>
+<body>
+
+<h2 class="demoHeaders"><!-- $$$$TITLE$$$$ -->$the_real_banana<!-- $$$$TITLE$$$$ --></h2>
+<div id="tabs">
+	<ul>
+		  <li><a href="#tabs-0">1: $the_real_banana.the_real_banana</a></li>
+    
+		  <li><a href="#tabs-1">2: @island</a></li>
+    
+		  <li><a href="#tabs-2">3: @island_plus1</a></li>
+    
+		  <li><a href="#tabs-3">4: @island_border</a></li>
+    
+		  <li><a href="#tabs-4">5: @rand_island_border</a></li>
+    
+		  <li><a href="#tabs-5">6: $the_real_banana.the_real_banana</a></li>
+    
+		<!-- $$$$HEAD$$$$ -->
+
+
+
+
+
+
+    </ul>
+        <div class="map_tab" id="tabs-0">
+            <div class="info_accordion">
+              <h3>Map Info</h3>
+              <div>
+                <p><p><b>Speed:</b> Normal, <b>Size:</b> Standard, <b>Starting Era:</b> Ancient</p></p>
+                <p>
+                    <label><input type="checkbox" class="chk_hill" checked/>Hills</label>
+                    <label><input type="checkbox" class="chk_forest" checked/>Forests</label>
+                    <label><input type="checkbox" class="chk_jungle" checked/>Jungles</label>
+                </p>
+                <p>
+                <label><input type="checkbox" class="chk_food" checked/>Food</label>
+                <label><input type="checkbox" class="chk_estrat" checked/>Early Strategic</label>
+                <label><input type="checkbox" class="chk_mstrat" checked/>Modern Strategic</label>
+                <label><input type="checkbox" class="chk_alux" checked/>Ancient Luxuries</label>
+                <label><input type="checkbox" class="chk_clux" checked/>Classical Luxuries (including jungled ancients)</label>
+                </p>
+              </div>
+            </div>
+        <table>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="4,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="5,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="6,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,16 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,16 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,16 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,16 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="5,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="6,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="8,15 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,15 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,14 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="6,14 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="7,14 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,14 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="4,13 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="5,13 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="6,13 wheat, grass"><img class="fd" src="i/wheat.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,13 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,12 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,12 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="3,12 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="4,12 iron, plains"><img class="es" src="i/iron.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="5,12 gold, plains hill"><img class="al" src="i/gold.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="6,12 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,12 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,12 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,11 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="2,11 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="3,11 coal, plains hill"><img class="ms" src="i/coal.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="4,11 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,11 oil, plains"><img class="ms" src="i/oil.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="6,11 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,11 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,11 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,10 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="2,10 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="3,10 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="4,10 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="5,10 fur, plains forest"><img class="al" src="i/fur.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="6,10 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,10 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,10 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="co"><a title="0,9 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,9 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="2,9 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="3,9 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="4,9 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,9 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu hl"><a title="6,9 tundra hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,9 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,9 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="co"><a title="0,8 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="1,8 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr jl"><a title="2,8 banana, grass jungle"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft iWR"><a title="3,8 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr iNR"><a title="4,8 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr fthl iNR"><a title="5,8 grass foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="6,8 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,8 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,8 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="co"><a title="0,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="2,7 horse, grass"><img class="es" src="i/horse.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr fthl"><a title="3,7 deer, grass foresthill"><img class="fd" src="i/deer.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="4,7 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,7 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="6,7 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,7 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,6 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="2,6 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="3,6 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="4,6 start for Temujin (0) (Genghis Khan/Zulu), iron, plains hill"><img src="i/razz.gif" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl iNR"><a title="5,6 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr fthl iNR"><a title="6,6 grass foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="7,6 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,6 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,6 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,6 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,5 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="2,5 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="3,5 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl fthl iWR"><a title="4,5 plains foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,5 wheat, plains"><img class="fd" src="i/wheat.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr iWR"><a title="6,5 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="7,5 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="8,5 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,5 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="10,5 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,5 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,4 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="3,4 copper, plains hill"><img class="es" src="i/copper.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr fthl iWR"><a title="4,4 grass foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,4 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="6,4 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="7,4 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu"><a title="8,4 marble, tundra"><img class="es" src="i/marble.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="9,4 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="10,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="11,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="12,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="13,4 coast"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,3 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,3 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,3 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,3 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr jl"><a title="4,3 banana, grass jungle"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,3 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="6,3 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="7,3 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="8,3 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="9,3 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="10,3 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="11,3 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="12,3 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="13,3 coast"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,2 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,2 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,2 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,2 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,2 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,2 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="6,2 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="7,2 sheep, grass"><img class="fd" src="i/sheep.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="8,2 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="9,2 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="10,2 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="11,2 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="12,2 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="13,2 coast"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="5,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="6,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="8,1 cow, grass"><img class="fd" src="i/cow.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="10,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="11,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="12,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,1 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="4,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="5,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="6,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,0 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,0 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,0 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,0 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+        </table>
+    </div>
+    
+		<div class="map_tab" id="tabs-1">
+        <table>
+            <tr>
+                <td><div class="p08f8"><a title="0, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 16: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 15: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 14: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 13: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 12: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 11: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 10: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 9: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 8: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 7: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 6: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 5: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 4: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 3: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 2: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 1: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 0: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+        </table>
+    </div>
+    
+		<div class="map_tab" id="tabs-2">
+        <table>
+            <tr>
+                <td><div class="p08f8"><a title="0, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 16: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 15: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 14: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 13: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 12: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 11: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 10: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 9: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 8: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 7: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 6: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 5: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 4: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 3: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 2: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 1: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="7, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 0: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+        </table>
+    </div>
+    
+		<div class="map_tab" id="tabs-3">
+        <table>
+            <tr>
+                <td><div class="p08f8"><a title="0, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 16: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 16: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 15: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 15: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 14: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 14: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 13: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 13: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 12: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 12: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 11: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 11: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 10: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 10: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 9: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 9: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="8, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 8: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 8: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="9, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 7: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 7: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 6: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 6: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 5: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 5: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 4: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 4: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pf808"><a title="0, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 3: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 3: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="1, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 2: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 2: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="2, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 1: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 1: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="3, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="4, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="5, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="6, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="10, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="11, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="12, 0: 1"><img src="i/none.png"/></a></div></td>
+                <td><div class="pf808"><a title="13, 0: 1"><img src="i/none.png"/></a></div></td>
+            </tr>
+        </table>
+    </div>
+    
+		<div class="map_tab" id="tabs-4">
+        <table>
+            <tr>
+                <td><div class="p08f8"><a title="0, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p28c8"><a title="3, 16: 0.186"><img src="i/none.png"/></a></div></td>
+                <td><div class="pc828"><a title="4, 16: 0.8096"><img src="i/none.png"/></a></div></td>
+                <td><div class="p18d8"><a title="5, 16: 0.1217"><img src="i/none.png"/></a></div></td>
+                <td><div class="p28c8"><a title="6, 16: 0.1455"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pa848"><a title="10, 16: 0.7148"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 16: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 16: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p7878"><a title="2, 15: 0.4966"><img src="i/none.png"/></a></div></td>
+                <td><div class="p18d8"><a title="3, 15: 0.1093"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08e8"><a title="10, 15: 0.0284"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 15: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 15: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pe808"><a title="1, 14: 0.9482"><img src="i/none.png"/></a></div></td>
+                <td><div class="p18d8"><a title="2, 14: 0.085"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pd818"><a title="10, 14: 0.9189"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 14: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 14: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pd818"><a title="0, 13: 0.8836"><img src="i/none.png"/></a></div></td>
+                <td><div class="pc828"><a title="1, 13: 0.8269"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p7878"><a title="9, 13: 0.4869"><img src="i/none.png"/></a></div></td>
+                <td><div class="p5898"><a title="10, 13: 0.334"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 13: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 13: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p9858"><a title="0, 12: 0.6216"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p5898"><a title="8, 12: 0.3805"><img src="i/none.png"/></a></div></td>
+                <td><div class="pd818"><a title="9, 12: 0.8863"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 12: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 12: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p7878"><a title="0, 11: 0.4678"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p28c8"><a title="8, 11: 0.145"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 11: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 11: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p38b8"><a title="0, 10: 0.2293"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p38b8"><a title="8, 10: 0.2026"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 10: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 10: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p28c8"><a title="8, 9: 0.172"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 9: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 9: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p8868"><a title="8, 8: 0.581"><img src="i/none.png"/></a></div></td>
+                <td><div class="p28c8"><a title="9, 8: 0.1424"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 8: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 8: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08e8"><a title="9, 7: 0.0417"><img src="i/none.png"/></a></div></td>
+                <td><div class="p8868"><a title="10, 7: 0.5665"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 7: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 7: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pa848"><a title="0, 6: 0.6924"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pb838"><a title="10, 6: 0.7433"><img src="i/none.png"/></a></div></td>
+                <td><div class="pd818"><a title="11, 6: 0.9268"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 6: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 6: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p28c8"><a title="0, 5: 0.192"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p8868"><a title="11, 5: 0.577"><img src="i/none.png"/></a></div></td>
+                <td><div class="p38b8"><a title="12, 5: 0.2623"><img src="i/none.png"/></a></div></td>
+                <td><div class="p18d8"><a title="13, 5: 0.0817"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 5: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 5: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="pb838"><a title="0, 4: 0.7982"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 4: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 4: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p28c8"><a title="0, 3: 0.1418"><img src="i/none.png"/></a></div></td>
+                <td><div class="pb838"><a title="1, 3: 0.7751"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 3: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 3: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="pa848"><a title="1, 2: 0.7208"><img src="i/none.png"/></a></div></td>
+                <td><div class="pd818"><a title="2, 2: 0.9232"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="3, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="13, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 2: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 2: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p7878"><a title="2, 1: 0.4792"><img src="i/none.png"/></a></div></td>
+                <td><div class="pe808"><a title="3, 1: 0.9486"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="4, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="5, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="6, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="10, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="11, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="12, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p8868"><a title="13, 1: 0.5624"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 1: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 1: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="p08f8"><a title="0, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="1, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="2, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p18d8"><a title="3, 0: 0.1089"><img src="i/none.png"/></a></div></td>
+                <td><div class="pd818"><a title="4, 0: 0.9032"><img src="i/none.png"/></a></div></td>
+                <td><div class="p7878"><a title="5, 0: 0.5152"><img src="i/none.png"/></a></div></td>
+                <td><div class="p8868"><a title="6, 0: 0.5816"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="7, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="8, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="9, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08e8"><a title="10, 0: 0.0164"><img src="i/none.png"/></a></div></td>
+                <td><div class="p48a8"><a title="11, 0: 0.2902"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08e8"><a title="12, 0: 0.0246"><img src="i/none.png"/></a></div></td>
+                <td><div class="pd818"><a title="13, 0: 0.8696"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="14, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="15, 0: 0"><img src="i/none.png"/></a></div></td>
+                <td><div class="p08f8"><a title="16, 0: 0"><img src="i/none.png"/></a></div></td>
+            </tr>
+        </table>
+    </div>
+    
+		<div class="map_tab" id="tabs-5">
+            <div class="info_accordion">
+              <h3>Map Info</h3>
+              <div>
+                <p><p><b>Speed:</b> Normal, <b>Size:</b> Standard, <b>Starting Era:</b> Ancient</p></p>
+                <p>
+                    <label><input type="checkbox" class="chk_hill" checked/>Hills</label>
+                    <label><input type="checkbox" class="chk_forest" checked/>Forests</label>
+                    <label><input type="checkbox" class="chk_jungle" checked/>Jungles</label>
+                </p>
+                <p>
+                <label><input type="checkbox" class="chk_food" checked/>Food</label>
+                <label><input type="checkbox" class="chk_estrat" checked/>Early Strategic</label>
+                <label><input type="checkbox" class="chk_mstrat" checked/>Modern Strategic</label>
+                <label><input type="checkbox" class="chk_alux" checked/>Ancient Luxuries</label>
+                <label><input type="checkbox" class="chk_clux" checked/>Classical Luxuries (including jungled ancients)</label>
+                </p>
+              </div>
+            </div>
+        <table>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="4,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="5,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="6,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,16 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,16 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,16 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,16 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,16 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="5,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="6,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="8,15 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,15 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,15 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,15 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,14 fish, ocean"><img class="fd" src="i/fish.png" /></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,14 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="6,14 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="7,14 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,14 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,14 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,14 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="4,13 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="5,13 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="6,13 wheat, grass"><img class="fd" src="i/wheat.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,13 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,13 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,13 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,12 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,12 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="3,12 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="4,12 iron, plains"><img class="es" src="i/iron.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="5,12 gold, plains hill"><img class="al" src="i/gold.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="6,12 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,12 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,12 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,12 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,11 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="2,11 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="3,11 coal, plains hill"><img class="ms" src="i/coal.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="4,11 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,11 oil, plains"><img class="ms" src="i/oil.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="6,11 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,11 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,11 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,11 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,10 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="2,10 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="3,10 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="4,10 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="5,10 fur, plains forest"><img class="al" src="i/fur.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="6,10 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,10 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,10 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,10 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="co"><a title="0,9 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,9 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="2,9 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="3,9 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="4,9 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,9 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu hl"><a title="6,9 tundra hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,9 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,9 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,9 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="co"><a title="0,8 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="1,8 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr jl"><a title="2,8 banana, grass jungle"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft iWR"><a title="3,8 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr iNR"><a title="4,8 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr fthl iNR"><a title="5,8 grass foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="6,8 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,8 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="8,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,8 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,8 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="co"><a title="0,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="2,7 horse, grass"><img class="es" src="i/horse.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr fthl"><a title="3,7 deer, grass foresthill"><img class="fd" src="i/deer.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="4,7 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,7 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="6,7 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,7 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="9,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,7 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,7 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,6 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="2,6 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="3,6 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="4,6 start for Temujin (0) (Genghis Khan/Zulu), iron, plains hill"><img src="i/razz.gif" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl iNR"><a title="5,6 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr fthl iNR"><a title="6,6 grass foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="7,6 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,6 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,6 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,6 fish, ocean"><img class="fd" src="i/fish.png" /></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,6 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,6 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,5 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="2,5 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="3,5 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl fthl iWR"><a title="4,5 plains foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="5,5 wheat, plains"><img class="fd" src="i/wheat.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr iWR"><a title="6,5 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="7,5 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="8,5 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,5 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="10,5 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,5 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,5 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,4 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="1,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="3,4 copper, plains hill"><img class="es" src="i/copper.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr fthl iWR"><a title="4,4 grass foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,4 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="6,4 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl ft"><a title="7,4 plains forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu"><a title="8,4 marble, tundra"><img class="es" src="i/marble.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="9,4 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="10,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="11,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="12,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="13,4 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,4 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,4 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,4 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,3 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,3 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="2,3 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,3 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr jl"><a title="4,3 banana, grass jungle"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,3 grass"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="6,3 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="7,3 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl"><a title="8,3 plains"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="9,3 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="10,3 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="11,3 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="12,3 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="13,3 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,3 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,3 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,3 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,2 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,2 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,2 fish, ocean"><img class="fd" src="i/fish.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="3,2 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,2 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="5,2 banana, grass"><img class="fd" src="i/banana.png" /></a></div></div></td>
+                <td><div class="w"><div class="gr hl"><a title="6,2 grass hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="7,2 sheep, grass"><img class="fd" src="i/sheep.png" /></a></div></div></td>
+                <td><div class="w"><div class="pl hl"><a title="8,2 plains hill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="9,2 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr ft"><a title="10,2 grass forest"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="tu fthl"><a title="11,2 tundra foresthill"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="12,2 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="13,2 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,2 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,2 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,2 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,1 fish, ocean"><img class="fd" src="i/fish.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="4,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="5,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="6,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="gr"><a title="8,1 cow, grass"><img class="fd" src="i/cow.png" /></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="10,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="11,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="12,1 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,1 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,1 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+            <tr>
+                <td><div class="w"><div class="oc"><a title="0,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="1,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="2,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="3,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="4,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="5,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="6,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="7,0 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="8,0 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="co"><a title="9,0 coast"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="10,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="11,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="12,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="13,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="14,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="15,0 ocean"><img src="i/none.png"/></a></div></div></td>
+                <td><div class="w"><div class="oc"><a title="16,0 ocean"><img src="i/none.png"/></a></div></div></td>
+            </tr>
+        </table>
+    </div>
+    
+		<!-- $$$$BODY$$$$ -->
+
+
+
+
+
+
+</div>
+
+<script src="debug/jquery-ui-1.11.4/external/jquery/jquery.js"></script>
+<script src="debug/jquery-ui-1.11.4/jquery-ui.js"></script>
+<script src="debug/toggle_tiles.js"></script>
+<script>
+    $(function() {
+        $(document).ready(function() {
+            var tabs = $( "#tabs" ).tabs({
+                activate: function (event, ui) {
+                    var $this = ui.newPanel;
+                    
+                    // resize the accordion to be the same size as the map
+                    var w = $("table", $this).first().width();
+                    var accordion = $(".info_accordion", $this).first();
+                    accordion.width(w);
+                    $('div', accordion).width(w-50.5);
+                    $('div', accordion).css('height','');
+                    
+                    // initial the tile state data for the new tab
+                    var tabID = $("#tabs").tabs("option", "active");
+                    if (! show_tiles.hasOwnProperty(tabID)) {
+                        show_tiles[tabID] = {
+                            'hl' : 1,
+                            'ft' : 1,
+                            'jl' : 1
+                        }
+                    }
+                }
+            });
+            tabs.find( ".ui-tabs-nav" ).sortable({
+                axis: "x",
+                stop: function() {
+                    tabs.tabs( "refresh" );
+                }
+            });
+                
+            $( ".tooltip" ).tooltip();
+
+            // Hover states on the static widgets
+            $( "#dialog-link, #icons li" ).hover(
+                function() {
+                    $( this ).addClass( "ui-state-hover" );
+                },
+                function() {
+                    $( this ).removeClass( "ui-state-hover" );
+                }
+            );
+            
+            $('.chk_food').change(function(){ toggle_resources(this, 'fd') });
+            $('.chk_estrat').change(function(){ toggle_resources(this, 'es') });
+            $('.chk_mstrat').change(function(){ toggle_resources(this, 'ms') });
+            $('.chk_alux').change(function(){ toggle_resources(this, 'al') });
+            $('.chk_clux').change(function(){ toggle_resources(this, 'cl') });
+            $('.chk_hill').change(function(){ toggle_hills(this) });
+            $('.chk_forest').change(function(){ toggle_trees(this, 'ft') });
+            $('.chk_jungle').change(function(){ toggle_trees(this, 'jl') });
+            
+            $( ".info_accordion" ).accordion({
+                active: false,
+                collapsible: true,
+            });
+            
+            // initialize tab0 accordion to have same size as map
+            $( ".info_accordion" ).each(function (index) {
+                var $this = $(this);
+                var w = $("table", $this.parent()).width();
+                $this.width(w);
+                $('div', $this).width(w-50.5);
+                $('div', $this).css('height','');
+            });
+            
+            var c0_alloc = $(".c0");
+            if (c0_alloc.length > 0) {
+                alloc_found = 1;
+                
+                var p = $('<p></p>');
+                var to = $('<label><input type="checkbox" class="chk_overlay" checked/>Empire Overlay</label>');
+                $('div', '.info_accordion').append(p);
+                p.append(to);
+                $('.chk_overlay').change(function(){ toggleAllocVis() });
+            }
+        });
+    });
+</script>
+</body>
+</html>
